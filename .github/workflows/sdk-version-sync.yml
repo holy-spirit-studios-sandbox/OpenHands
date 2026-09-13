@@ -33,10 +33,6 @@ on:
         required: false
         type: string
 
-  schedule:
-    # Run every 6 hours to catch upstream changes reasonably quickly
-    - cron: "0 */6 * * *"
-
 concurrency:
   group: sdk-sync-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

@@ -4,8 +4,6 @@ name: Issue Duplicate Check via OpenHands Cloud
 on:
     issues:
         types: [opened]
-    schedule:
-        - cron: 0 9 * * *
     workflow_dispatch:
         inputs:
             mode:
@@ -74,9 +72,7 @@ jobs:
                   github-token: ${{ secrets.OPENHANDS_BOT_GITHUB_PAT_PUBLIC || github.token }}
 
     auto-close-duplicates:
-        if: |
-            github.event_name == 'schedule' ||
-            (github.event_name == 'workflow_dispatch' && inputs.mode == 'auto-close')
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'auto-close'
         runs-on: ubuntu-latest
         timeout-minutes: 20
         concurrency:
